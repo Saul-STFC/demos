@@ -13,6 +13,7 @@ on:
       - demos/airflow-scheduled-job/dbt/Dockerfile
       - demos/airflow-scheduled-job/dbt/requirements.txt
       - .github/workflows/dev_dbt.yaml
+      - .github/workflows/reusable_build_image.yaml
 
 jobs:
   build_image:

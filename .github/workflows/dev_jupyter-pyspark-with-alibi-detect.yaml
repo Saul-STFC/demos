@@ -13,6 +13,7 @@ on:
       - demos/signal-processing/Dockerfile-jupyter
       - demos/signal-processing/requirements.txt
       - .github/workflows/dev_jupyter-pyspark-with-alibi-detect.yaml
+      - .github/workflows/reusable_build_image.yaml
 
 jobs:
   build_image:
