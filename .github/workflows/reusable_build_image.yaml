@@ -91,42 +91,13 @@ jobs:
   notify:
     name: Failure Notification
     needs: [build, publish_manifests]
-    permissions: {}
     runs-on: ubuntu-latest
-    if: failure()
+    if: failure() || (github.run_attempt > 1 && !cancelled())
     steps:
-      # Pinned to the latest v1.x patch, not v4 (latest): v2+ has breaking changes
-      - uses: slackapi/slack-github-action@fcfb566f8b0aab22203f066d80ca1d7e4b5d05b3 # v1.27.1
+      - uses: stackabletech/actions/send-slack-notification@e8aed001d347bcf693e41b61f4098b0cb94b4ab6 # v0.18.0
         with:
+          publish-manifests-result: ${{ needs.publish_manifests.result }}
+          build-result: ${{ needs.build.result }}
+          slack-token: ${{ secrets.slack-token }}
+          type: container-image-build
           channel-id: "C07UG6JH44F" # notifications-container-images
-          payload: |
-            {
-              "text": "*${{ github.workflow }}* failed (attempt ${{ github.run_attempt }})",
-              "attachments": [
-                {
-                  "pretext": "See the details below for a summary of which job(s) failed.",
-                  "color": "#aa0000",
-                  "fields": [
-                    {
-                      "title": "Build/Publish Image",
-                      "short": true,
-                      "value": "${{ needs.build.result }}"
-                    },
-                    {
-                      "title": "Build/Publish Manifests",
-                      "short": true,
-                      "value": "${{ needs.publish_manifests.result }}"
-                    }
-                  ],
-                  "actions": [
-                    {
-                      "type": "button",
-                      "text": "Go to workflow run",
-                      "url": "${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}/attempts/${{ github.run_attempt }}"
-                    }
-                  ]
-                }
-              ]
-            }
-        env:
-          SLACK_BOT_TOKEN: ${{ secrets.slack-token }}
