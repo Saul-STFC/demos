@@ -45,7 +45,7 @@ jobs:
           CONTAINERFILE_PATH: ${{ inputs.containerfile-path }}
           IMAGE_VERSION: ${{ inputs.image-version }}
           IMAGE_NAME: ${{ inputs.image-name }}
-        uses: stackabletech/actions/build-container-image@0fe048f952bee522474903a925ea48dc706a0bb4 # v0.17.5
+        uses: stackabletech/actions/build-container-image@e8aed001d347bcf693e41b61f4098b0cb94b4ab6 # v0.18.0
         with:
           image-name: ${{ env.IMAGE_NAME }}
           image-index-manifest-tag: ${{ env.IMAGE_VERSION }}
@@ -54,7 +54,7 @@ jobs:
       - name: Publish Container Image on oci.stackable.tech
         env:
           IMAGE_NAME: ${{ inputs.image-name }}
-        uses: stackabletech/actions/publish-image@0fe048f952bee522474903a925ea48dc706a0bb4 # v0.17.5
+        uses: stackabletech/actions/publish-image@e8aed001d347bcf693e41b61f4098b0cb94b4ab6 # v0.18.0
         with:
           image-registry-uri: oci.stackable.tech
           image-registry-username: robot$demos+github-action-build
@@ -80,7 +80,7 @@ jobs:
         env:
           IMAGE_VERSION: ${{ inputs.image-version }}
           IMAGE_NAME: ${{ inputs.image-name }}
-        uses: stackabletech/actions/publish-image-index-manifest@0fe048f952bee522474903a925ea48dc706a0bb4 # v0.17.5
+        uses: stackabletech/actions/publish-image-index-manifest@e8aed001d347bcf693e41b61f4098b0cb94b4ab6 # v0.18.0
         with:
           image-registry-uri: oci.stackable.tech
           image-registry-username: robot$demos+github-action-build
