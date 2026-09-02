@@ -61,8 +61,8 @@ jobs:
           image-registry-password: ${{ secrets.harbor-robot-secret }}
           image-repository: demos/${{ env.IMAGE_NAME }}
           image-manifest-tag: ${{ steps.build.outputs.image-manifest-tag }}
-canonical-image-manifest-tag: ${{ steps.build.outputs.image-manifest-tag }}
-canonical-source-image-uri: ${{ steps.build.outputs.image-manifest-uri }}
+          canonical-image-manifest-tag: ${{ steps.build.outputs.image-manifest-tag }}
+          canonical-source-image-uri: ${{ steps.build.outputs.image-manifest-uri }}
 
   publish_manifests:
     name: Build/Publish Manifest
