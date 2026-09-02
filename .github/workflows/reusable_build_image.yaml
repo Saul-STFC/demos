@@ -61,7 +61,8 @@ jobs:
           image-registry-password: ${{ secrets.harbor-robot-secret }}
           image-repository: demos/${{ env.IMAGE_NAME }}
           image-manifest-tag: ${{ steps.build.outputs.image-manifest-tag }}
-          source-image-uri: ${{ steps.build.outputs.image-manifest-uri }}
+canonical-image-manifest-tag: ${{ steps.build.outputs.image-manifest-tag }}
+canonical-source-image-uri: ${{ steps.build.outputs.image-manifest-uri }}
 
   publish_manifests:
     name: Build/Publish Manifest
@@ -86,7 +87,7 @@ jobs:
           image-registry-username: robot$demos+github-action-build
           image-registry-password: ${{ secrets.harbor-robot-secret }}
           image-repository: demos/${{ env.IMAGE_NAME }}
-          image-index-manifest-tag: ${{ env.IMAGE_VERSION }}
+          canonical-image-index-manifest-tag: ${{ env.IMAGE_VERSION }}
 
   notify:
     name: Failure Notification
